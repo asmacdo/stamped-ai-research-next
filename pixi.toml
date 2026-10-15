@@ -1,0 +1,22 @@
+[workspace]
+name = "stamped-ai-research-next"
+channels = ["conda-forge"]
+platforms = [{ platform = "osx-arm64", macos = "14.0" }, "linux-64"]
+
+[dependencies]
+python = ">=3.11,<3.14"
+git = "*"
+numpy = "*"
+scipy = "*"
+pandas = "*"
+matplotlib-base = "*"
+pyyaml = "*"
+jsonschema = "*"
+pre-commit = "*"
+tomlkit = "*"
+
+[pypi-dependencies]
+datalad = "*"
+git-annex = "*"
+con-duct = "*"
+tiktoken = "*"
