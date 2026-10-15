@@ -45,6 +45,8 @@ def main():
     parser.add_argument("--prompt", type=Path, required=True)
     parser.add_argument("--cli", type=Path)
     parser.add_argument("--seconds", type=int, default=240)
+    parser.add_argument("--model", default="gpt-6-astra")
+    parser.add_argument("--effort", default="ultra")
     parser.add_argument("--codex-home", type=Path,
                         help="Prepared isolated public profile, without private global instructions")
     parser.add_argument("--prepare-only", action="store_true")
@@ -125,7 +127,8 @@ def main():
     if not args.prepare_only:
         run([sys.executable, scripts / "launch_native_probe.py", "--checkout", checkout,
              "--prompt", args.prompt.resolve(), "--output", evidence / "native",
-             "--cli", args.cli, "--seconds", str(args.seconds), "--condition", args.condition], repo)
+             "--cli", args.cli, "--seconds", str(args.seconds), "--condition", args.condition,
+             "--model", args.model, "--effort", args.effort], repo)
 
 
 if __name__ == "__main__":

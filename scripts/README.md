@@ -5,7 +5,7 @@ Prerequisites are Python 3.11+, Git, wt-utils, Pixi, Entire and the bundled Code
 Credentials remain with the existing host providers.
 
 One-time host defaults live outside the project at `~/.config/stamped-ai-research-next/launch.json` (override with `--host-config`).
-The JSON keys are `repo`, `env_manifest`, `approved_hooks`, `trust_sync`, `resolver`, `checkpoint_repo`, `cli`, `codex_home`, `annex_remote`, `annex_git_url` and `annex_url`.
+The JSON keys are `repo`, `env_manifest`, `approved_hooks`, `trust_sync`, `resolver`, `checkpoint_repo`, `cli`, `codex_home`, `model`, `effort`, `annex_remote`, `annex_git_url` and `annex_url`.
 Paths are absolute.
 The resolver is the approved fresh per-turn provenance command; the trust helper must reject changed hooks and explicit denials.
 For this project, `checkpoint_repo` is `leej3/stamped-ai-research-next`, remote name is `con-hub`, Git URL is `https://hub.centerforopenneuroscience.org/leej3/stamped-ai-research-next.git` and annex URL is `annex+https://hub.centerforopenneuroscience.org:443/git-annex-p2phttp`.
@@ -38,3 +38,9 @@ Git hooks prefer `scripts/commit_provenance_hook.py` from the current checkout, 
 After integrating these scripts, rerun preparation from the stable main checkout so fallback paths do not depend on a temporary implementation worktree.
 Hook trust does not automatically follow branches, clones or paths: native preparation and a real capture check are required before work.
 Bulk checkpoint pushing remains disabled; review and publish exact refs separately.
+
+The stable root's seven byte-identical native hooks were trusted separately in both the normal Desktop profile and the isolated worker profile.
+A fresh Desktop coordinator session can therefore load those approvals; an existing session must not be assumed to reload them.
+Normal Desktop global instructions are unchanged.
+Only isolated worker launches were tested for the clean public prompt boundary.
+Capture checks and publication remain distinct operations.
