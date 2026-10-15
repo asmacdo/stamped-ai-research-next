@@ -12,12 +12,11 @@
   Keep complete command, stream, resource and summary records beside the experiment outputs; retain failures.
   Use annex for large artifacts; verify payload retrieval.
   MechaBABS keeps its native records.
-- Keep Workshop controls inactive.
-  Credentials stay in host providers.
+- Credentials stay in host providers.
   Ordinary research logs are intended output; never publish credentials or restricted human data.
-  Existing pilot captures remain under their prior publication hold.
-- Use Conventional Commits and freshly resolved commit-provenance trailers.
-  Run Snapper on prose; preserve DataLad and native capture records.
+- Use Conventional Commits for authored messages and freshly resolved commit-provenance trailers.
+  Preserve native DataLad subjects and run records; append attribution without rewriting them.
+  Run Snapper on prose.
 - Adapt reusable skills when a recurring tool problem is demonstrated.
   Keep skill entrypoints concise, route substantial conditional detail to references, and verify behavior after compression.
 

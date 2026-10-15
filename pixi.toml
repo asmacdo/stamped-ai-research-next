@@ -14,9 +14,18 @@ pyyaml = "*"
 jsonschema = "*"
 pre-commit = "*"
 tomlkit = "*"
+pytest = "*"
+rfc3339-validator = "*"
 
 [pypi-dependencies]
 datalad = "*"
 git-annex = "*"
 con-duct = "*"
 tiktoken = "*"
+pytest-evals = "==0.3.4"
+tox = "*"
+
+[tasks]
+launch = { cmd = "python scripts/prepare_launch.py", description = "Prepare and launch one isolated research worker" }
+datalad-report = { cmd = "datalad -f json rerun --report", description = "Inspect a native DataLad run record" }
+datalad-replay = { cmd = "datalad rerun", description = "Replay a native DataLad run" }
