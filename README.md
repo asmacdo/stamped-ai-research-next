@@ -11,6 +11,7 @@ Large artifacts and execution records use git-annex, with payloads on [CON Hub](
 | Preparation check | Evidence |
 |---|---|
 | Community-library analysis, independent answer check, two DataLad replays, rejected no-op | [21-check trial](experiments/datalad-annex/README.md) |
+| Cold public recipient replay after a documented submodule correction | [15-check recipient trial](experiments/recipient-cold-002/README.md) |
 | Real annex upload and independent anonymous retrieval | [Three matching payload hashes](experiments/access/README.md) |
 | Locked Linux environment and completed Slurm analysis; local/cluster outputs match | [Job 65719918](experiments/cluster/README.md) |
 | Native capture, hook approval, condition exposure and hosted links | [Capture trials](experiments/entire-capture-proof/README.md) |

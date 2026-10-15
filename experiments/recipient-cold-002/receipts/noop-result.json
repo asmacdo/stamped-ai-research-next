@@ -1,0 +1,7 @@
+{
+  "dataset": "/private/tmp/stamped-recipient-cold-l4HlRFSj/noop-002",
+  "hashes_match_original": false,
+  "ok": false,
+  "python": "/private/tmp/stamped-recipient-cold-l4HlRFSj/noop-002/.pixi/envs/default/bin/python",
+  "reason": "generated table missing"
+}
