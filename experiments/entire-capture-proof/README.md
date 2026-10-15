@@ -10,13 +10,26 @@ Tests used Entire 0.11.4, Codex Desktop 26.1007.71326 and bundled CLI 0.162.0-al
 | Separate linked worktree | Fresh session in prepared worktree | Passed; `clean-worktree-hosted.json` |
 | Fresh clone | Fresh session in prepared independent clone | Passed; `clean-clone-hosted.json` |
 | Native spawned child in parent checkout | Native child identity, completed file event and stored task transcript | Passed; `clean-child-hosted.json` |
-| Native child assigned a separate prepared worktree | Additional test in progress | Pending |
+| Native child assigned a separate prepared worktree | Absolute file event and child-owned commit | Passed; `separate-child-hosted.json` |
 
 Receipts are under [receipts](receipts).
-The `hosted_verified` field in the first receipts means exact remote checkpoint/session metadata matched through `entire checkpoint explain --repo`; it does not alone establish dashboard indexing.
-The new repository dashboard still returned 404 at the last check; onboarding is being checked.
-The child is a task nested under its parent checkpoint, not a top-level session.
-Its recorded initial cwd remains the parent's checkout; a shell cwd is not a new native session cwd.
+Each clean test now has a visible Entire session page as well as matching remote checkpoint metadata and exact uploaded refs.
+The new repository initially returned 404: remote checkpoint resolution alone did not prove dashboard indexing.
+Explicitly onboarding its GitHub mirror resolved that distinction; the UI then showed all five sessions.
+
+| Capture | Actual session page observed in Entire |
+|---|---|
+| Branch switch | [Open session](https://entire.io/gh/leej3/stamped-ai-research-next/session/01a1406b-2f30-78c1-add0-8766cd1a9b90) |
+| Linked worktree | [Open session](https://entire.io/gh/leej3/stamped-ai-research-next/session/01a1406b-c517-7da3-914b-6eeef77c0bdd) |
+| Fresh clone | [Open session](https://entire.io/gh/leej3/stamped-ai-research-next/session/01a1406c-049c-7f30-8fca-25f6f3302dcd) |
+| Child in parent checkout | [Open session](https://entire.io/gh/leej3/stamped-ai-research-next/session/01a1406c-6c70-7082-aee1-e7f79a901f90) |
+| Child in separate worktree | [Open session](https://entire.io/gh/leej3/stamped-ai-research-next/session/01a14078-0213-7c81-b719-3eae308453f4) |
+
+Both child tests are tasks nested under their parent checkpoint, not top-level sessions.
+In the separate-worktree test the child wrote only its assigned absolute path and committed in that worktree.
+Its native session's initial cwd remains the parent's checkout.
+The cross-worktree task summary omitted its file list; the receipt checks the stored completed absolute FileChange event and the child commit instead.
+Independent native CLI sessions per worktree remain the simpler launch route for parallel research.
 
 [All twelve original study session links](original-session-links.md) were observed directly in the hosted UI.
 
@@ -53,7 +66,9 @@ Early probes inherited private host guidance; their captures remain local and ar
 Later probes used an isolated host profile with existing auth referenced by symlink, no copied global instructions, and explicit host-skill exclusions.
 No credential contents are read into the project or capture receipts.
 
-Full duct logs and native stdout are retained task-locally under `logs` and `trials`; publication/annex packaging is a separate reviewed step.
-This first implementation commit contains helpers, prompts and bounded receipts only.
+Complete clean duct records and CLI outputs are committed under `logs` and `trials`; all 16 annexed files were copied successfully to `con-hub`.
+The [capture inventory](capture-inventory.json) records every original hash, size and mode: 87 publishable files and 26 locally held files from three early ambient-host runs.
+Complete held bytes remain local and were not uploaded.
+Metadata, stdout, stderr, usage, summary data and empty streams are retained.
 No events were simulated, imported or adopted.
 Success proves these observed sessions, not automatic trust or guaranteed capture of future sessions.

@@ -29,8 +29,12 @@ def main():
     p.add_argument("--hosted-repo")
     p.add_argument("--require-uploaded", action="store_true")
     p.add_argument("--task", help="Native child agent ID stored under the parent checkpoint")
+    p.add_argument("--event-checkout", type=Path,
+                   help="Explicit child-owned checkout when the native session cwd remains the parent's")
+    p.add_argument("--event-commit", help="Actual child commit in --event-checkout")
     args = p.parse_args()
     root = args.checkout.resolve()
+    event_root = args.event_checkout.resolve() if args.event_checkout else root
     if args.output.exists():
         raise SystemExit("Receipt exists; preserve it")
     commit = run(["git", "rev-parse", args.commit], root).decode().strip()
@@ -51,15 +55,21 @@ def main():
     identity_id = args.session
     if args.task:
         tasks = [t for t in metadata.get("tasks", []) if t.get("agent_id") == args.task]
-        if len(tasks) != 1 or not tasks[0].get("transcript_stored") or args.file not in tasks[0].get("files", []):
-            raise SystemExit("Native child task/transcript/file metadata missing")
+        if len(tasks) != 1 or not tasks[0].get("transcript_stored"):
+            raise SystemExit("Native child task/transcript metadata missing")
+        # Cross-worktree tasks can omit the summary file list. Require the
+        # actual completed native file event below in every case.
+        if tasks[0].get("files") and args.file not in tasks[0]["files"]:
+            raise SystemExit("Native task file summary contradicts expected file")
         # The native CLI makes --task and --session-index mutually exclusive.
         transcript_args = ["entire", "checkpoint", "explain", "--commit", commit,
                            "--transcript", "--task", args.task]
         identity_id = args.task
     transcript = run(transcript_args, root)
     identities, events = [], []
-    names = {args.file, str(root / args.file)}
+    names = {str(event_root / args.file)}
+    if event_root == root:
+        names.add(args.file)
     for number, raw in enumerate(transcript.splitlines(), 1):
         try:
             item = json.loads(raw)
@@ -77,6 +87,13 @@ def main():
                 events.append({"line": number, "item_id": event.get("id"), "file": args.file})
     if not identities or not any(Path(i["cwd"]).resolve() == root for i in identities) or not events:
         raise SystemExit("Stored native session/cwd/completed FileChange evidence missing")
+    child_commit = None
+    if args.event_commit:
+        child_commit = run(["git", "rev-parse", args.event_commit], event_root).decode().strip()
+        changed = run(["git", "diff-tree", "--no-commit-id", "--name-only", "-r", child_commit], event_root).decode().splitlines()
+        child_message = run(["git", "show", "-s", "--format=%B", child_commit], event_root).decode()
+        if changed != [args.file] or "Co-Authored-By: Codex Desktop " not in child_message or "unavailable" in child_message:
+            raise SystemExit("Child commit changed unexpected paths or lacks exact provenance")
     refrows = run(["git", "for-each-ref", "--format=%(refname) %(objectname)", "refs/entire/checkpoints"], root).decode().splitlines()
     matches = [r.split() for r in refrows if r.split()[0].endswith("/" + metadata["checkpoint_id"])]
     if len(matches) != 1:
@@ -85,6 +102,7 @@ def main():
     result = {"verified_at": datetime.now(timezone.utc).isoformat(), "checkout": str(root),
               "commit": commit, "code_ref": args.code_ref, "checkpoint_id": metadata["checkpoint_id"],
               "code_ref_oid": code_ref_oid, "child_task_id": args.task,
+              "event_checkout": str(event_root), "event_commit": child_commit,
               "checkpoint_ref": ref, "checkpoint_oid": oid, "branch": metadata.get("branch"),
               "session_id": args.session, "all_checkpoint_session_ids": [s["session_id"] for s in metadata["sessions"]],
               "native_capture_verified": True, "identities": identities, "file_events": events,
