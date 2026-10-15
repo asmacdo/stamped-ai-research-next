@@ -21,7 +21,7 @@ A successfully configured tool is not a passed probe.
 
 The intervention starts from [PR23](https://github.com/con/skills/pull/23), with our adaptations on `codex/pr23-stamped-rerun`.
 [PR24](https://github.com/con/skills/pull/24) and [PR26](https://github.com/con/skills/pull/26) remain named candidates; including them later requires declaring a changed intervention.
-The five adapted entrypoint bodies total 2,652 tokens versus 4,779 before adaptation using `o200k_base` (references and frontmatter excluded); this is a size comparison, not a quality or efficacy result.
+The five workflows retain checklist coverage while moving conditional details into references.
 
 The [retained candidate review](https://github.com/leej3/stamped-ai-research/blob/main/research/skill-candidates/REVIEW.md) identifies concrete upstream improvements at its pinned revisions:
 

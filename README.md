@@ -2,6 +2,7 @@
 
 A prepared workspace for a second exploratory comparison of research with and without STAMPED skills.
 Start with [prompt.md](prompt.md); [preparation notes](PREPARATION.md) summarize the practical lessons and changes to the candidate skills.
+The [prepared launcher](scripts/README.md) creates each worker checkout with its environment, submodules, native capture and declared skill exposure already configured.
 
 Experiments add ordinary files under `experiments/` and dependencies to the root `pixi.toml`.
 Concurrent agents use external Git worktrees; their changes merge here.
