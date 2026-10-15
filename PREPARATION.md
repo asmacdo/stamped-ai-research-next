@@ -14,6 +14,11 @@ Undiscovered account-level skills, later-arriving candidate PRs and changing pac
 | Logs or whole checkouts are scattered outside the research object | Merge ordinary experiment files and complete logs; retain replay refs and annex payloads. |
 | Too much prose, too few useful figures | Short skill entrypoints with conditional references; require figures and visual inspection. |
 
+For the next host, run three small probes concurrently before research: local analysis/replay plus annex retrieval; a scheduled cluster job and return transfer; native capture in a fresh prepared checkout.
+Use their retained failures to fix the host once.
+This host has completed the local and cluster routes; the capture module records its separate cases.
+A successfully configured tool is not a passed probe.
+
 The intervention starts from [PR23](https://github.com/con/skills/pull/23), with our adaptations on `codex/pr23-stamped-rerun`.
 [PR24](https://github.com/con/skills/pull/24) and [PR26](https://github.com/con/skills/pull/26) remain named candidates; including them later requires declaring a changed intervention.
 The five adapted entrypoint bodies total 2,652 tokens versus 4,779 before adaptation using `o200k_base` (references and frontmatter excluded); this is a size comparison, not a quality or efficacy result.

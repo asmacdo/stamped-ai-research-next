@@ -38,6 +38,8 @@ The prepared commit hook must resolve exact provenance afresh for every authored
 
 For recipient replay, keep a stable published checkout containing `scripts/prepare_checkout.py` and pass that absolute path to the initializer.
 The separate replay clone can then check out the recorded base revision without losing the initializer or its sibling hook implementation.
+After checking out the recorded base, run `git submodule update --init --recursive` in the replay clone and confirm `git status --short` is empty.
+A recursively cloned recipient otherwise retains the newer skills checkout, and DataLad correctly refuses the dirty dataset.
 Use the replay clone's root Pixi environment and recorded lock throughout.
 The stable checkout also supplies `experiments/datalad-annex/verify.py`: call it with `DATASET --expect-absent --receipt NEW_JSON` before replay, then with `DATASET --expected-summary STABLE/experiments/datalad-annex/receipts/toy-001/summary.json --receipt ANOTHER_NEW_JSON` afterward.
 These commands check all three output paths and annex payload absence, then the independent numerical oracle and original output hashes.
