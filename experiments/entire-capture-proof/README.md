@@ -67,7 +67,7 @@ Later probes used an isolated host profile with existing auth referenced by syml
 No credential contents are read into the project or capture receipts.
 
 Complete clean duct records and CLI outputs are committed under `logs` and `trials`; all 16 annexed files were copied successfully to `con-hub`.
-The [capture inventory](capture-inventory.json) records every original hash, size and mode: 87 publishable files and 26 locally held files from three early ambient-host runs.
+The [capture inventory](capture-inventory.json) records every original hash, size and mode: 87 publishable files and 30 locally held files from three early ambient-host runs.
 Complete held bytes remain local and were not uploaded.
 Metadata, stdout, stderr, usage, summary data and empty streams are retained.
 No events were simulated, imported or adopted.

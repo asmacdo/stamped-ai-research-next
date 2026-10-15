@@ -1018,6 +1018,42 @@
       "disposition": "held-local",
       "reason": "early ambient-host profile or targeted marker",
       "marker_hit_count": 0
+    },
+    {
+      "path": "native/branch-switch-01/events.jsonl",
+      "bytes": 15107,
+      "sha256": "b7b7c1fe28650b7e8ad53960d39ea943f4025cff76caec6143c1e2fcc784c6b2",
+      "mode": "0o644",
+      "disposition": "held-local",
+      "reason": "original native CLI output from ambient-host probe",
+      "marker_hit_count": 0
+    },
+    {
+      "path": "native/branch-switch-01/final.txt",
+      "bytes": 546,
+      "sha256": "192ed2c3715f19c129ffc1232a75bb1ac1e53a56cb39e0ab83156ebc4475bcad",
+      "mode": "0o644",
+      "disposition": "held-local",
+      "reason": "original native CLI output from ambient-host probe",
+      "marker_hit_count": 0
+    },
+    {
+      "path": "native/branch-switch-01/launch.json",
+      "bytes": 917,
+      "sha256": "5d55ae82705954459326de02e0fad99e15e005f78f7d1d267bf9692019200ad1",
+      "mode": "0o644",
+      "disposition": "held-local",
+      "reason": "original native CLI output from ambient-host probe",
+      "marker_hit_count": 0
+    },
+    {
+      "path": "native/branch-switch-01/result.json",
+      "bytes": 1219,
+      "sha256": "de01b56109e5e9b11471f88408f7f78f0393d5bd12439bd814d589ffea3f5c8a",
+      "mode": "0o644",
+      "disposition": "held-local",
+      "reason": "original native CLI output from ambient-host probe",
+      "marker_hit_count": 0
     }
   ]
 }
