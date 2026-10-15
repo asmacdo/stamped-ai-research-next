@@ -11,3 +11,5 @@ pixi.lock annex.largefiles=nothing
 *.pdf annex.largefiles=anything
 *.jsonl annex.largefiles=anything
 *.tsv annex.largefiles=(largerthan=100kb)
+* annex.backend=MD5E
+**/.git* annex.largefiles=nothing
