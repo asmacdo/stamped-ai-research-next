@@ -10,3 +10,7 @@ The corrected batch-job trial is in `experiments/cluster/`.
 
 Personal authentication remains in host credential providers.
 Cluster results return through the local host for online publication.
+
+An independent clone fetched the probe, numerical table and PNG from CON Hub with credential helpers and interactive prompts disabled.
+All three SHA-256 hashes matched.
+See [receipt](remote-retrieval.json) and the complete `logs/annex-recipient-001/` record.
