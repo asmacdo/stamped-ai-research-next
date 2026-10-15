@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """A known-answer synthetic SciPy calculation, pandas table and rendered figure."""
 
+import argparse
 import json
 from pathlib import Path
 import sys
@@ -16,6 +17,9 @@ from scipy import stats
 
 def main():
     module = Path(__file__).resolve().parent
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output-directory", type=Path, default=module / "outputs")
+    args = parser.parse_args()
     values = pd.read_csv(module / "input.csv")["value"].to_numpy(dtype=float)
     if values.shape != (5,) or not np.isfinite(values).all():
         raise ValueError("This known-answer fixture requires five finite observations")
@@ -26,8 +30,8 @@ def main():
         t=test.statistic, df=test.df, p=test.pvalue,
         ci_low=interval.low, ci_high=interval.high,
     )])
-    outputs = module / "outputs"
-    outputs.mkdir(exist_ok=True)
+    outputs = args.output_directory
+    outputs.mkdir(parents=True, exist_ok=True)
     table.to_csv(outputs / "statistics.tsv", sep="\t", index=False, float_format="%.12g")
     plt.rcParams.update({"svg.hashsalt": "datalad-annex-toy-v1", "font.size": 11})
     figure, axis = plt.subplots(figsize=(6, 3.6), layout="constrained")
