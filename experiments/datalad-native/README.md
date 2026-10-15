@@ -15,5 +15,8 @@ pixi run duct -p experiments/datalad-native/logs/native-001/run_ --fail-time 0 \
   python experiments/datalad-native/trial.py --run-id native-001
 ```
 
+Verified in [native-001](receipts/native-001/summary.json): 15 checks passed, including two native rerun generations with identical TSV, SVG and PNG bytes.
+Complete command streams and resource records are retained in [logs/native-001](logs/native-001/).
+
 The provenance resolver comes from the host launch configuration or `--resolver`.
 The earlier compatibility experiment remains historical evidence; new native records need no parser adapter.
