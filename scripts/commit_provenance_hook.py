@@ -12,11 +12,9 @@ def main():
     parser.add_argument("message", type=Path)
     args = parser.parse_args()
     text = args.message.read_text()
-    if text.startswith("[DATALAD RUNCMD] "):
-        text = "feat: record DataLad run\n\n" + text
-    elif text.startswith("[DATALAD] "):
-        text = "chore: record DataLad dataset operation\n\n" + text
-    if not re.match(r"^[a-z][a-z0-9-]*(?:\([^\r\n()]+\))?!?: [^\r\n]+", text):
+    native_record = text.startswith(("[DATALAD RUNCMD] ", "[DATALAD] "))
+    # Native run records must begin with this exact marker for DataLad rerun.
+    if not native_record and not re.match(r"^[a-z][a-z0-9-]*(?:\([^\r\n()]+\))?!?: [^\r\n]+", text):
         raise SystemExit("Commit subject must use Conventional Commits")
     resolved = subprocess.run([str(args.resolver)], check=True, capture_output=True, text=True)
     trailers = resolved.stdout.strip().splitlines()

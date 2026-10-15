@@ -31,8 +31,8 @@ Unknown hook changes or mismatched manifests, locks or remotes stop setup.
 
 `prepare_checkout.py --provenance-only` installs only the fresh commit hook in an existing replay fixture.
 It requires `--checkout`, `--resolver`, and a new `--receipt` path.
-DataLad run messages receive one Conventional subject and blank line ahead of the untouched native run block.
-This is a transparent compatibility shape, not an unmodified-native DataLad parser claim.
+DataLad run commits retain their native `[DATALAD RUNCMD]` subject and record, with fresh provenance appended.
+Ordinary authored commits use Conventional Commits; native `datalad rerun` needs no adapter for new runs.
 
 Git hooks prefer `scripts/commit_provenance_hook.py` from the current checkout, falling back to the stable checkout that installed them.
 After integrating these scripts, rerun preparation from the stable main checkout so fallback paths do not depend on a temporary implementation worktree.
